@@ -22,5 +22,41 @@
  * @returns {string} The driving action to take
  */
 export function getTrafficAction(color) {
-  // Your code here
+  if (typeof color !== "string") {
+    return false;
+  }
+
+  const signal = color.trim().toLowerCase();
+
+  let simulator;
+
+  switch (signal) {
+    case "green":
+      simulator = "GO";
+      break;
+
+    case "yellow":
+      simulator = "SLOW DOWN";
+      break;
+
+    case "red":
+      simulator = "STOP";
+      break;
+
+    case "flashing red":
+      simulator = "STOP AND PROCEED WITH CAUTION";
+      break;
+
+    default:
+      simulator = "INVALID SIGNAL";
+  }
+
+  return simulator;
 }
+
+console.log(getTrafficAction("green"));        
+console.log(getTrafficAction("YELLOW"));       
+console.log(getTrafficAction("Red"));       
+console.log(getTrafficAction("Flashing Red")); 
+console.log(getTrafficAction("FLASHING RED")); 
+console.log(getTrafficAction(""));             

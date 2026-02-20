@@ -29,5 +29,47 @@
  * @returns {number} Shipping cost, 0 for free shipping, or -1 for invalid input
  */
 export function calculateShipping(weight, country, orderTotal) {
-  // Your code here
+  // Validation
+  if (weight <= 0 || orderTotal < 0) {
+    return -1;
+  }
+
+  let cost;
+
+  if (country === "US") {
+    // Free shipping rule: strictly greater than 50
+    if (orderTotal > 50) {
+      return 0;
+    }
+
+    // Domestic shipping tiers
+    if (weight <= 1) {
+      cost = 5;
+    } else if (weight <= 5) {
+      cost = 10;
+    } else {
+      cost = 15;
+    }
+  } else {
+    // Free shipping rule: strictly greater than 100
+    if (orderTotal > 100) {
+      return 0;
+    }
+
+    // International shipping tiers
+    if (weight <= 1) {
+      cost = 15;
+    } else if (weight <= 5) {
+      cost = 25;
+    } else {
+      cost = 40;
+    }
+  }
+
+  return cost;
 }
+
+console.log(calculateShipping(2, "US", 60));     
+console.log(calculateShipping(2, "US", 50));   
+console.log(calculateShipping(3, "Canada", 100));
+console.log(calculateShipping(3, "Canada", 101));

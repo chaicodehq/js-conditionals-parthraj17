@@ -31,5 +31,43 @@
  * @returns {{ season: string, activity: string } | null}
  */
 export function getSeasonActivity(month, temperature) {
-  // Your code here
+ 
+  let season;
+  let activity;
+
+  // Step 1 — Determine the season
+  if (month === 12 || month === 1 || month === 2) {
+    season = "Winter";
+  } else if (month === 3 || month === 4 || month === 5) {
+    season = "Spring";
+  } else if (month === 6 || month === 7 || month === 8) {
+    season = "Summer";
+  } else if (month === 9 || month === 10 || month === 11) {
+    season = "Autumn";
+  } else {
+
+    return null;
+
+  }
+
+  // Step 2 — Suggest activity based on season + temperature
+  switch (season) {
+    case "Winter":
+      activity = temperature < 0 ? "skiing" : "ice skating";
+      break;
+    case "Spring":
+      activity = temperature > 20 ? "hiking" : "museum visit";
+      break;
+    case "Summer":
+      activity = temperature > 35 ? "swimming" : "cycling";
+      break;
+    case "Autumn":
+      activity = temperature > 15 ? "nature walk" : "reading at a cafe";
+      break;
+  }
+
+  return { season, activity };
 }
+getSeasonActivity(1, -5);   // { season: "Winter", activity: "skiing" }
+getSeasonActivity(4, 18);   // { season: "Spring", activity: "museum visit" }
+getSeasonActivity(7, 40);   // { season: "Summer", activity: "swimming" }t(10, 12);  // { season: "Autumn", activity: "reading at a cafe" }
